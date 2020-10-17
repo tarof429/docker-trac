@@ -1,5 +1,4 @@
 FROM debian:stable
-MAINTAINER martin scharm
 
 # Install wget and install/updates certificates
 RUN apt-get update \
@@ -18,8 +17,9 @@ RUN apt-get update \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
 
-VOLUME ["/trac"]
-EXPOSE 80 443
+COPY ./trac /trac
+
+EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/tracd"]
 CMD ["-p", "80", "-e", "/trac/projects", "--basic-auth=*,/trac/.htpasswd,Restricted"]
