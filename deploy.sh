@@ -13,7 +13,7 @@ docker push ${IMAGE}:${SHA}
 echo "Cleaning up images"
 docker rmi ${IMAGE}:latest ${IMAGE}:${SHA}
 
-#echo "Running ansible scripts"
-#cd ansible
-#echo "Running ansible-playbook -e SHA=${SHA} deploy_to_k8s.yml"
-#ansible-playbook -e "SHA=${SHA} MYSQL_ROOT_PASSWORD_READ=${MYSQL_ROOT_PASSWORD_READ} MYSQL_PASSWORD_READ=${MYSQL_PASSWORD_READ}" deploy_to_k8s.yml
+echo "Running ansible scripts"
+cd ansible
+echo "Running ansible-playbook -e SHA=${SHA} deploy_to_k8s.yml"
+ansible-playbook -e "SHA=${SHA} deploy_to_k8s.yml
