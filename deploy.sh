@@ -16,4 +16,4 @@ docker rmi ${IMAGE}:latest ${IMAGE}:${SHA}
 echo "Running ansible scripts"
 cd ansible
 echo "Running ansible-playbook -e SHA=${SHA} deploy_to_k8s.yml"
-ansible-playbook -e "SHA=${SHA} deploy_to_k8s.yml
+ansible-playbook -e "SHA=${SHA}" deploy_to_k8s.yml
