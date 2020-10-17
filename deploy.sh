@@ -11,7 +11,7 @@ docker push ${IMAGE}:latest
 docker push ${IMAGE}:${SHA}
 
 echo "Cleaning up images"
-docker rmi ${IMAGE}:latest -t ${IMAGE}:${SHA}
+docker rmi ${IMAGE}:latest ${IMAGE}:${SHA}
 
 #echo "Running ansible scripts"
 #cd ansible
