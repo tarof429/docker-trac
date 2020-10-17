@@ -1,0 +1,7 @@
+---
+- hosts: zaxserver
+  tasks:
+    - name: Start jenkins
+      command: docker-compose up -d
+      args:
+        chdir: jenkins

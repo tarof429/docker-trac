@@ -1,1 +1,3 @@
 testdata/
+ansible/hosts
+ansible/ansible.cfg

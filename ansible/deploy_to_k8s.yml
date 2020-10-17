@@ -1,0 +1,19 @@
+---
+- hosts: zaxman
+  vars:
+    checkout_dir: /tmp/docker-trac
+  tasks:
+    - name: Checkout code
+      git:
+        repo: https://github.com/tarof429/docker-trac
+        dest: "{{ checkout_dir }}"
+
+    - name: Apply deployments
+      command: kubectl apply -f k8s
+      args:
+        chdir: "{{ checkout_dir }}"
+   
+    - name: Update deployments
+      command: "kubectl set image deployments/docker-trac-deployment docker-trac=tarof429/docker-trac:{{ SHA }}"
+      args:
+        chdir: "{{ checkout_dir }}"

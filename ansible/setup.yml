@@ -1,0 +1,24 @@
+---
+- hosts: zaxserver, milkshake
+  become: true 
+  tasks:
+    - name: Install required packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' ]
+   
+    - name: Add docker GPG key
+      apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg 
+         state: present
+    
+    - name: Add docker repository
+      apt_repository:
+         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+         state: present
+   
+    - name: Update apt and install docker-ce
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io' ]
+
+    - name: All non-root account to use docker
+      command: usermod -aG docker taro
