@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-trac-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: docker-trac-label
+  template:
+    metadata:
+      labels:
+        component: docker-trac-label
+    spec:
+      containers:
+        - name: docker-trac 
+          image: tarof429/docker-trac:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
