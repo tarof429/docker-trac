@@ -25,6 +25,7 @@ pipeline {
 
                             status = sh(returnStatus: true, script: "sh ./deploy.sh")
                             if (status != 0) {
+                                 currentBuild.result = 'FAILURE'
                                 error("Deployment failed")
                             }
                         }
